@@ -65,7 +65,6 @@ a{ color:inherit; text-decoration:none; }
   font-family:var(--display); font-size:1.15rem; letter-spacing:.22em;
   color:var(--ink); white-space:nowrap;
 }
-/* mobile-first: nav links as a drop panel toggled by hamburger */
 .nav__links{
   list-style:none;
   position:absolute; top:100%; left:0; right:0;
@@ -187,19 +186,54 @@ a{ color:inherit; text-decoration:none; }
   text-transform:uppercase; color:var(--taupe); width:100%; margin-bottom:.4rem;
 }
 
+/* ---------- SERVICES ---------- */
+.services{
+  padding:clamp(4rem,9vw,7rem) 0;
+  background:var(--bg-2);
+  border-top:1px solid var(--line);
+}
+.services__head{
+  text-align:center;
+  margin-bottom:clamp(2.4rem,5vw,4rem);
+}
+.services__head .eyebrow{ display:block; margin-bottom:1rem; }
+.services__grid{
+  display:grid; grid-template-columns:1fr; gap:clamp(1.2rem,2.5vw,1.6rem);
+}
+.service-card{
+  background:var(--white); border:1px solid var(--line);
+  padding:clamp(2rem,4.5vw,3rem);
+  display:flex; flex-direction:column; gap:.9rem;
+  transition:box-shadow .4s var(--ease), transform .4s var(--ease);
+}
+.service-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 20px 50px -20px rgba(28,25,22,.14);
+}
+.service-card__no{
+  font-family:var(--display); color:var(--gold); font-size:.88rem; letter-spacing:.14em;
+}
+.service-card__title{
+  font-family:var(--display); font-size:clamp(1.2rem,2.4vw,1.55rem); font-weight:400; line-height:1.2;
+}
+.service-card__desc{
+  color:var(--taupe); font-size:.91rem; line-height:1.72; margin-top:.2rem;
+}
+
 /* ---------- WORK / PROJECTS ---------- */
 .work{ padding:clamp(3rem,7vw,5rem) 0 clamp(5rem,12vw,9rem); }
 .work__head{
-  display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between;
-  gap:1rem; margin-bottom:clamp(3rem,7vw,5rem);
+  text-align:center;
+  margin-bottom:clamp(3rem,7vw,5rem);
 }
 .work__head .eyebrow{ display:block; margin-bottom:1rem; }
-.work__head p{ color:var(--taupe); max-width:36ch; font-size:.92rem; }
+.work__head p{ color:var(--taupe); max-width:36ch; font-size:.92rem; margin-inline:auto; }
 
 .project{ margin-bottom:clamp(4rem,9vw,7.5rem); }
 .project:last-child{ margin-bottom:0; }
 .project__head{
-  position:relative; display:flex; flex-wrap:wrap; align-items:baseline; gap:.4rem 1.1rem;
+  position:relative;
+  display:flex; flex-direction:column; align-items:center; text-align:center;
   padding-bottom:1.3rem; margin-bottom:clamp(1.4rem,3vw,2.2rem);
   border-bottom:1px solid var(--line);
 }
@@ -211,7 +245,7 @@ a{ color:inherit; text-decoration:none; }
   font-size:clamp(1.4rem,3.4vw,2.2rem);
 }
 .project__meta{
-  margin-left:auto; font-size:.68rem; letter-spacing:.24em; text-transform:uppercase;
+  font-size:.68rem; letter-spacing:.24em; text-transform:uppercase;
   color:var(--taupe);
 }
 .project__rule{
@@ -261,7 +295,6 @@ a{ color:inherit; text-decoration:none; }
 .shot:focus-visible .shot__cap{ transform:translateY(0); }
 .shot:focus-visible{ outline:2px solid var(--gold); outline-offset:4px; }
 
-/* missing-image passe-partout */
 .shot.is-missing img,
 .shot.is-missing .shot__overlay{ display:none; }
 .shot.is-missing .shot__inner{
@@ -276,8 +309,77 @@ a{ color:inherit; text-decoration:none; }
   font-size:.8rem; letter-spacing:.32em; text-transform:uppercase;
 }
 
+/* ---------- SOCIAL PROOF ---------- */
+.proof{
+  padding:clamp(3.5rem,8vw,6rem) 0;
+  background:var(--ink); color:var(--white);
+}
+.proof__label{
+  display:block; text-align:center; color:var(--gold);
+  margin-bottom:clamp(2rem,5vw,3.5rem);
+}
+.proof__stats{
+  display:flex; flex-wrap:wrap; justify-content:center; align-items:center;
+}
+.proof__stat{
+  flex:1; min-width:160px; text-align:center;
+  padding:1rem clamp(1.5rem,4vw,3.5rem);
+}
+.proof__sep{
+  width:1px; height:56px; background:rgba(251,249,245,.15);
+  flex-shrink:0; align-self:center;
+}
+.proof__num{
+  display:block; font-family:var(--display);
+  font-size:clamp(2.8rem,6.5vw,4.8rem); line-height:1;
+  color:var(--white);
+}
+.proof__sub{
+  display:block; font-size:.7rem; letter-spacing:.28em; text-transform:uppercase;
+  color:rgba(251,249,245,.5); margin-top:.7rem;
+}
+
+/* ---------- REVIEWS ---------- */
+.reviews{
+  padding:clamp(4rem,9vw,7rem) 0;
+  border-top:1px solid var(--line);
+}
+.reviews__head{
+  text-align:center;
+  margin-bottom:clamp(2.4rem,5vw,4rem);
+}
+.reviews__head .eyebrow{ display:block; margin-bottom:1rem; }
+.reviews__grid{
+  display:grid; grid-template-columns:1fr; gap:clamp(1.2rem,3vw,1.8rem);
+}
+.review-card{
+  background:var(--white); border:1px solid var(--line);
+  padding:clamp(1.8rem,4vw,2.4rem);
+  display:flex; flex-direction:column; gap:1rem;
+}
+.review-card__mark{
+  font-family:var(--display); font-size:2.4rem; color:var(--gold); line-height:1;
+}
+.review-card__text{
+  font-size:.96rem; line-height:1.75; font-style:italic; flex:1;
+}
+.review-card__footer{
+  padding-top:1rem; border-top:1px solid var(--line);
+}
+.review-card__name{
+  display:block; font-family:var(--display); font-size:1rem; letter-spacing:.01em;
+}
+.review-card__meta{
+  display:block; font-size:.7rem; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--taupe); margin-top:.25rem;
+}
+
 /* ---------- CONTACT ---------- */
 .contact{ padding:clamp(4rem,9vw,7rem) 0; background:var(--white); border-top:1px solid var(--line); }
+.contact__header{
+  text-align:center;
+}
+.contact__header .eyebrow{ display:block; margin-bottom:1rem; }
 .contact__grid{
   display:grid; grid-template-columns:1fr; gap:clamp(2.6rem,6vw,5rem);
   margin-top:clamp(2.4rem,5vw,3.6rem);
@@ -392,6 +494,8 @@ a.contact__link:focus-visible::after{ width:100%; }
   .nav__links li, .nav__links li:first-child{ border:none; }
   .nav__links a{ min-height:auto; padding:.4rem 0; font-size:.82rem; letter-spacing:.14em; }
   .nav__links a::after{ bottom:0; }
+  .services__grid{ grid-template-columns:repeat(3,1fr); }
+  .reviews__grid{ grid-template-columns:repeat(3,1fr); }
 }
 @media (min-width:860px){
   .project__grid{ grid-template-columns:repeat(6,1fr); grid-auto-flow:row dense; align-items:start; }
@@ -403,6 +507,11 @@ a.contact__link:focus-visible::after{ width:100%; }
 @media (min-width:1024px){
   .about__grid{ grid-template-columns:1.05fr .95fr; }
   .contact__grid{ grid-template-columns:1fr 1fr; }
+}
+@media (max-width:640px){
+  .proof__sep{ display:none; }
+  .proof__stat{ min-width:50%; border-bottom:1px solid rgba(251,249,245,.08); }
+  .proof__stat:last-child{ border-bottom:none; }
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -481,24 +590,108 @@ a.contact__link:focus-visible::after{ width:100%; }
   </div>
 </section>
 
+<!-- ================= SERVICES ================= -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="services__head" data-reveal>
+      <span class="eyebrow">Usługi</span>
+      <h2 class="section-title">Co oferujemy</h2>
+    </div>
+    <div class="services__grid">
+      <div class="service-card ph" data-reveal>
+        <span class="service-card__no">01</span>
+        <h3 class="service-card__title">Projekt koncepcyjny</h3>
+        <p class="service-card__desc">Wizja przestrzeni, moodboard, dobór materiałów i kolorów. Pierwszy krok do wymarzonego wnętrza — spójna koncepcja, która porządkuje Twoje oczekiwania.</p>
+      </div>
+      <div class="service-card ph" data-reveal>
+        <span class="service-card__no">02</span>
+        <h3 class="service-card__title">Projekt wykonawczy</h3>
+        <p class="service-card__desc">Pełna dokumentacja techniczna: rzuty, przekroje, karty materiałów i specyfikacje. Gotowe do realizacji przez ekipę budowlaną lub wykończeniową.</p>
+      </div>
+      <div class="service-card ph" data-reveal>
+        <span class="service-card__no">03</span>
+        <h3 class="service-card__title">Nadzór autorski</h3>
+        <p class="service-card__desc">Towarzyszę przy realizacji — koordynuję wykonawców, kontroluję zgodność z projektem i reaguje na bieżące pytania. Spokój dla Ciebie przez cały czas budowy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= WORK ================= -->
 <section class="work" id="work">
   <div class="wrap">
-    <div class="work__head">
-      <div data-reveal>
-        <span class="eyebrow">Realizacje</span>
-        <h2 class="section-title">Wybrane projekty</h2>
-      </div>
-      <p data-reveal>Spójna paleta ciepłych beży, drewna, trawertynu i delikatnego złota — każdy projekt jako osobna opowieść.</p>
+    <div class="work__head" data-reveal>
+      <span class="eyebrow">Realizacje</span>
+      <h2 class="section-title">Wybrane projekty</h2>
+      <p>Spójna paleta ciepłych beży, drewna, trawertynu i delikatnego złota — każdy projekt jako osobna opowieść.</p>
     </div>
     <div id="projects" aria-label="Realizacje"></div>
+  </div>
+</section>
+
+<!-- ================= SOCIAL PROOF ================= -->
+<section class="proof" aria-label="Statystyki">
+  <div class="wrap">
+    <span class="proof__label eyebrow">Zaufało nam już</span>
+    <div class="proof__stats">
+      <div class="proof__stat" data-reveal>
+        <span class="proof__num">100</span>
+        <span class="proof__sub">zadowolonych klientów</span>
+      </div>
+      <span class="proof__sep" aria-hidden="true"></span>
+      <div class="proof__stat" data-reveal>
+        <span class="proof__num">159</span>
+        <span class="proof__sub">zrealizowanych projektów</span>
+      </div>
+      <span class="proof__sep" aria-hidden="true"></span>
+      <div class="proof__stat" data-reveal>
+        <span class="proof__num">99%</span>
+        <span class="proof__sub">satysfakcji klienta</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REVIEWS ================= -->
+<section class="reviews" id="reviews">
+  <div class="wrap">
+    <div class="reviews__head" data-reveal>
+      <span class="eyebrow">Opinie</span>
+      <h2 class="section-title">Co mówią klienci</h2>
+    </div>
+    <div class="reviews__grid">
+      <div class="review-card ph" data-reveal>
+        <div class="review-card__mark">"</div>
+        <p class="review-card__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Projekt wnętrza przerósł nasze oczekiwania — spójna koncepcja, świetna komunikacja i efekt, który zachwyca każdego gościa.</p>
+        <div class="review-card__footer">
+          <span class="review-card__name">Anna i Marek K.</span>
+          <span class="review-card__meta">Wrocław · 2024</span>
+        </div>
+      </div>
+      <div class="review-card ph" data-reveal>
+        <div class="review-card__mark">"</div>
+        <p class="review-card__text">Współpraca przebiegała sprawnie i profesjonalnie. Wszystkie nasze uwagi były brane pod uwagę, a finalny efekt to dokładnie to, o czym marzyliśmy.</p>
+        <div class="review-card__footer">
+          <span class="review-card__name">Piotr W.</span>
+          <span class="review-card__meta">Wrocław · 2024</span>
+        </div>
+      </div>
+      <div class="review-card ph" data-reveal>
+        <div class="review-card__mark">"</div>
+        <p class="review-card__text">Niesamowite wyczucie materiałów i proporcji. Łazienka zaprojektowana przez MUVIN.SPACE to teraz moje ulubione miejsce w całym domu.</p>
+        <div class="review-card__footer">
+          <span class="review-card__name">Karolina M.</span>
+          <span class="review-card__meta">Wrocław · 2023</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ================= CONTACT ================= -->
 <section class="contact" id="contact">
   <div class="wrap">
-    <div data-reveal>
+    <div class="contact__header" data-reveal>
       <span class="eyebrow">Kontakt</span>
       <h2 class="section-title">Porozmawiajmy o Twoim wnętrzu</h2>
     </div>
@@ -803,7 +996,7 @@ a.contact__link:focus-visible::after{ width:100%; }
       gsap.ticker.lagSmoothing(0);
     }
 
-    // HERO wordmark reveal (split into chars)
+    /* HERO wordmark reveal (split into chars) */
     var wm = document.querySelector('.hero__wordmark-inner');
     if (wm){
       var text = wm.textContent;
@@ -829,37 +1022,49 @@ a.contact__link:focus-visible::after{ width:100%; }
         });
       });
 
+      /* -- Realizacje: varied reveal animations per shot -- */
+      var SHOT_VARIANTS = [
+        { clip:'inset(0% 0% 100% 0%)', ease:'power3.out',  dur:1.20 }, /* bottom up   */
+        { clip:'inset(0% 100% 0% 0%)', ease:'expo.out',    dur:1.10 }, /* from right  */
+        { clip:'inset(0% 0% 0% 100%)', ease:'power4.out',  dur:1.15 }, /* from left   */
+        { clip:'inset(0% 0% 100% 0%)', ease:'expo.out',    dur:1.30 }, /* bottom up ² */
+        { clip:'inset(100% 0% 0% 0%)', ease:'power3.out',  dur:1.05 }, /* from top    */
+      ];
+      var SHOT_DELAYS = [0, 0.14, 0.07, 0.21, 0.05, 0.18, 0.10, 0.03];
+
       gsap.utils.toArray('.project').forEach(function(pr){
         var rule = pr.querySelector('[data-rule]');
         if (rule){
           gsap.to(rule, {
-            scaleX:1, duration:1.1, ease:'power3.out',
+            scaleX:1, duration:1.2, ease:'expo.out',
             scrollTrigger:{ trigger:pr.querySelector('.project__head'), start:'top 85%' }
           });
         }
 
         gsap.utils.toArray(pr.querySelectorAll('.shot')).forEach(function(shot, i){
           var inner = shot.querySelector('.shot__inner');
-          var img = shot.querySelector('img');
+          var img   = shot.querySelector('img');
+          var v     = SHOT_VARIANTS[i % SHOT_VARIANTS.length];
+          var delay = SHOT_DELAYS[i % SHOT_DELAYS.length];
 
-          // signature reveal: unmask the frame from the bottom up
           gsap.from(inner, {
-            clipPath:'inset(0% 0% 100% 0%)',
-            duration:1.2, ease:'power3.out',
-            delay:(i % 2) * 0.09,
-            scrollTrigger:{ trigger:shot, start:'top 90%' }
+            clipPath: v.clip,
+            duration: v.dur,
+            ease: v.ease,
+            delay: delay,
+            scrollTrigger:{ trigger:shot, start:'top 92%' }
           });
 
-          // bounded parallax — image stays overscaled so edges never show
+          /* bounded parallax — image stays overscaled so edges never show */
           gsap.set(img, { scale:1.16, yPercent:-6, transformOrigin:'center center' });
           gsap.to(img, {
             yPercent:6, ease:'none',
-            scrollTrigger:{ trigger:shot, start:'top bottom', end:'bottom top', scrub:0.6 }
+            scrollTrigger:{ trigger:shot, start:'top bottom', end:'bottom top', scrub:0.7 }
           });
         });
       });
 
-      // Parallax on large about image (max ~8%)
+      /* parallax on large about image (max ~8%) */
       gsap.utils.toArray('[data-parallax]').forEach(function(el){
         gsap.fromTo(el, { yPercent:-8 }, {
           yPercent:8, ease:'none',
