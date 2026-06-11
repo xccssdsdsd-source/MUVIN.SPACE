@@ -139,6 +139,39 @@ a{ color:inherit; text-decoration:none; }
   font-size:clamp(.7rem,1.7vw,.95rem); letter-spacing:.42em;
   text-transform:uppercase; color:var(--taupe); font-weight:400;
 }
+.hero__divider{
+  display:block; width:1px; height:36px;
+  background:linear-gradient(var(--taupe), transparent);
+  margin:1.8rem auto 0;
+}
+.hero__cta{
+  display:inline-flex; align-items:center; gap:.9rem;
+  margin-top:1.8rem;
+  font-size:.76rem; letter-spacing:.26em; text-transform:uppercase;
+  color:var(--ink); font-weight:400;
+  position:relative;
+  transition:color .35s var(--ease);
+}
+.hero__cta::after{
+  content:''; position:absolute; left:0; bottom:-3px; height:1px; width:0;
+  background:var(--gold); transition:width .4s var(--ease);
+}
+.hero__cta:hover{ color:var(--gold); }
+.hero__cta:hover::after{ width:100%; }
+.hero__cta-arrow{
+  display:inline-block; font-size:1rem; line-height:1;
+  transition:transform .35s var(--ease);
+}
+.hero__cta:hover .hero__cta-arrow{ transform:translateX(4px); }
+.hero__location{
+  position:absolute; bottom:2.2rem; right:clamp(1.2rem,4vw,3rem);
+  font-size:.66rem; letter-spacing:.26em; text-transform:uppercase; color:var(--taupe);
+  writing-mode:vertical-rl; transform:rotate(180deg);
+  display:none;
+}
+@media(min-width:768px){
+  .hero__location{ display:block; }
+}
 .hero__scroll{
   position:absolute; bottom:2.2rem; left:50%; transform:translateX(-50%);
   display:flex; flex-direction:column; align-items:center; gap:.7rem;
@@ -550,7 +583,13 @@ a.contact__link:focus-visible::after{ width:100%; }
   <div data-hero>
     <h1 class="hero__wordmark" aria-label="MUVIN.SPACE"><span class="hero__wordmark-inner" aria-hidden="true">MUVIN.SPACE</span></h1>
     <p class="hero__sub">Architect &amp; Interior Designer</p>
+    <span class="hero__divider" aria-hidden="true"></span>
+    <a href="#work" class="hero__cta">
+      Zobacz realizacje
+      <span class="hero__cta-arrow" aria-hidden="true">&#8594;</span>
+    </a>
   </div>
+  <div class="hero__location" aria-hidden="true">Wrocław &middot; Polska</div>
   <div class="hero__scroll" aria-hidden="true">
     <span>Przewiń</span>
     <span class="line"></span>
@@ -1043,7 +1082,10 @@ a.contact__link:focus-visible::after{ width:100%; }
       var tl = gsap.timeline({ defaults:{ ease:'expo.out' } });
       tl.from('.hero__wordmark .char', { yPercent:115, opacity:0, duration:1.1, stagger:0.045, delay:0.15 })
         .from('.hero__sub', { y:18, opacity:0, duration:1 }, '-=0.6')
-        .from('.hero__scroll', { opacity:0, duration:0.8 }, '-=0.4');
+        .from('.hero__divider', { scaleY:0, opacity:0, duration:0.7, transformOrigin:'top' }, '-=0.5')
+        .from('.hero__cta', { y:14, opacity:0, duration:0.8 }, '-=0.4')
+        .from('.hero__location', { opacity:0, duration:0.8 }, '-=0.6')
+        .from('.hero__scroll', { opacity:0, duration:0.8 }, '-=0.6');
 
       gsap.utils.toArray('[data-reveal]').forEach(function(el){
         gsap.from(el, {
