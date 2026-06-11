@@ -187,49 +187,83 @@ a{ color:inherit; text-decoration:none; }
   text-transform:uppercase; color:var(--taupe); width:100%; margin-bottom:.4rem;
 }
 
-/* ---------- WORK / GALLERY ---------- */
+/* ---------- WORK / PROJECTS ---------- */
 .work{ padding:clamp(3rem,7vw,5rem) 0 clamp(5rem,12vw,9rem); }
 .work__head{
   display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between;
-  gap:1rem; margin-bottom:clamp(2.4rem,5vw,3.8rem);
+  gap:1rem; margin-bottom:clamp(3rem,7vw,5rem);
 }
 .work__head .eyebrow{ display:block; margin-bottom:1rem; }
-.work__head p{ color:var(--taupe); max-width:34ch; font-size:.92rem; }
+.work__head p{ color:var(--taupe); max-width:36ch; font-size:.92rem; }
 
-.grid{
-  display:grid; grid-template-columns:repeat(12,1fr);
-  gap:clamp(.7rem,1.6vw,1.4rem);
+.project{ margin-bottom:clamp(4rem,9vw,7.5rem); }
+.project:last-child{ margin-bottom:0; }
+.project__head{
+  position:relative; display:flex; flex-wrap:wrap; align-items:baseline; gap:.4rem 1.1rem;
+  padding-bottom:1.3rem; margin-bottom:clamp(1.4rem,3vw,2.2rem);
+  border-bottom:1px solid var(--line);
 }
+.project__no{
+  font-family:var(--display); font-size:.92rem; color:var(--gold); letter-spacing:.12em;
+}
+.project__title{
+  font-family:var(--display); font-weight:400; line-height:1.1; letter-spacing:.01em;
+  font-size:clamp(1.4rem,3.4vw,2.2rem);
+}
+.project__meta{
+  margin-left:auto; font-size:.68rem; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--taupe);
+}
+.project__rule{
+  position:absolute; left:0; bottom:-1px; height:1px; width:100%;
+  background:var(--gold); transform:scaleX(0); transform-origin:left;
+}
+
+.project__grid{
+  display:grid; grid-template-columns:repeat(2,1fr);
+  gap:clamp(.6rem,1.6vw,1.2rem); grid-auto-flow:row dense;
+}
+
 .shot{
-  grid-column:span 6; position:relative; overflow:hidden;
-  background:var(--bg-2); cursor:pointer; border:none;
+  position:relative; overflow:visible;
+  background:transparent; cursor:pointer; border:none;
   padding:0; margin:0; font:inherit; color:inherit; text-align:left;
-  display:block; width:100%;
+  display:block; width:100%; grid-column:span 1;
+  transition:transform .55s var(--ease), box-shadow .55s var(--ease);
 }
-.shot__inner{ position:relative; width:100%; height:100%; overflow:hidden; aspect-ratio:var(--ar,4/5); }
+.c6{ grid-column:span 2; }
+.shot__inner{
+  position:relative; width:100%; height:100%; overflow:hidden;
+  aspect-ratio:var(--ar,4/5); background:var(--bg-2);
+  box-shadow:inset 0 0 0 1px rgba(28,25,22,.06);
+}
 .shot img{
   width:100%; height:100%; object-fit:cover;
-  transition:transform .9s var(--ease);
+  transition:transform 1s var(--ease);
   will-change:transform;
 }
 .shot__overlay{
   position:absolute; inset:0; z-index:2;
-  background:linear-gradient(to top, rgba(28,25,22,.55) 0%, rgba(28,25,22,0) 55%);
+  background:linear-gradient(to top, rgba(28,25,22,.58) 0%, rgba(28,25,22,0) 58%);
   opacity:0; transition:opacity .5s var(--ease);
   display:flex; align-items:flex-end; padding:1.3rem;
 }
 .shot__cap{
   color:var(--white); font-family:var(--body);
-  font-size:.78rem; letter-spacing:.16em; text-transform:uppercase;
-  transform:translateY(8px); transition:transform .5s var(--ease);
+  font-size:.74rem; letter-spacing:.18em; text-transform:uppercase;
+  transform:translateY(10px); transition:transform .5s var(--ease);
+}
+.shot:hover, .shot:focus-visible{
+  transform:translateY(-4px);
+  box-shadow:0 28px 55px -28px rgba(28,25,22,.5);
 }
 .shot:hover img,
-.shot:focus-visible img{ transform:scale(1.06); }
+.shot:focus-visible img{ transform:scale(1.05); }
 .shot:hover .shot__overlay,
 .shot:focus-visible .shot__overlay{ opacity:1; }
 .shot:hover .shot__cap,
 .shot:focus-visible .shot__cap{ transform:translateY(0); }
-.shot:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+.shot:focus-visible{ outline:2px solid var(--gold); outline-offset:4px; }
 
 /* missing-image passe-partout */
 .shot.is-missing img,
@@ -363,25 +397,22 @@ a.contact__link:focus-visible::after{ width:100%; }
   .nav__links a{ min-height:auto; padding:.4rem 0; font-size:.82rem; letter-spacing:.14em; }
   .nav__links a::after{ bottom:0; }
 }
+@media (min-width:860px){
+  .project__grid{ grid-template-columns:repeat(6,1fr); }
+  .c2{ grid-column:span 2; }
+  .c3{ grid-column:span 3; }
+  .c4{ grid-column:span 4; }
+  .c6{ grid-column:span 6; }
+}
 @media (min-width:1024px){
   .about__grid{ grid-template-columns:1.05fr .95fr; }
   .contact__grid{ grid-template-columns:1fr 1fr; }
-
-  .shot{ grid-column:span 4; }
-  .w4{ grid-column:span 4; }
-  .w5{ grid-column:span 5; }
-  .w6{ grid-column:span 6; }
-  .w7{ grid-column:span 7; }
-  .w8{ grid-column:span 8; }
-  .w12{ grid-column:span 12; }
-}
-@media (max-width:1023px){
-  .shot.shot--full{ grid-column:span 12; }
 }
 
 @media (prefers-reduced-motion: reduce){
   .hero__scroll .line{ animation:none; }
   .shot img{ transition:none; }
+  .project__rule{ transform:scaleX(1); }
 }
 </style>
 </head>
@@ -462,10 +493,9 @@ a.contact__link:focus-visible::after{ width:100%; }
         <span class="eyebrow">Realizacje</span>
         <h2 class="section-title">Wybrane projekty</h2>
       </div>
-      <!-- DO UZUPEŁNIENIA: opis sekcji realizacje -->
-      <p class="ph" data-reveal>Mieszkania, kuchnie i strefy dzienne — spójna paleta ciepłych beży, drewna i delikatnego złota.</p>
+      <p data-reveal>Spójna paleta ciepłych beży, drewna, trawertynu i delikatnego złota — każdy projekt jako osobna opowieść.</p>
     </div>
-    <div class="grid" id="grid" aria-label="Galeria realizacji"></div>
+    <div id="projects" aria-label="Realizacje"></div>
   </div>
 </section>
 
@@ -561,54 +591,99 @@ a.contact__link:focus-visible::after{ width:100%; }
 (function(){
   'use strict';
 
-  /* ---------- DATA: realizacje (natural sort) ---------- */
-  var WORKS = [
-    { src:'assets/work-01.jpg',  w:'w7',  ar:'4/3' },
-    { src:'assets/work-02.jpg',  w:'w5',  ar:'4/5' },
-    { src:'assets/work-03.jpg',  w:'w5',  ar:'4/5' },
-    { src:'assets/work-04.jpg',  w:'w7',  ar:'4/3' },
-    { src:'assets/work-05.webp', w:'w12', ar:'21/9', full:true },
-    { src:'assets/work-06.webp', w:'w4',  ar:'4/5' },
-    { src:'assets/work-07.webp', w:'w4',  ar:'4/5' },
-    { src:'assets/work-08.webp', w:'w4',  ar:'4/5' },
-    { src:'assets/work-09.webp', w:'w8',  ar:'16/9' },
-    { src:'assets/work-10.webp', w:'w4',  ar:'4/5' },
-    { src:'assets/work-11.webp', w:'w6',  ar:'1/1' },
-    { src:'assets/work-12.webp', w:'w6',  ar:'1/1' },
-    { src:'assets/work-13.webp', w:'w12', ar:'21/9', full:true },
-    { src:'assets/work-14.jpg',  w:'w4',  ar:'4/5' },
-    { src:'assets/work-15.jpg',  w:'w4',  ar:'4/5' },
-    { src:'assets/work-16.jpg',  w:'w4',  ar:'4/5' }
+  /* ---------- DATA: realizacje grouped by project ---------- */
+  var PROJECTS = [
+    {
+      no:'01',
+      title:'Apartament — strefa dzienna',
+      meta:'Kuchnia & salon · Wrocław',
+      cap:'Strefa dzienna · Wrocław',
+      shots:[
+        { src:'assets/work-05.webp', c:'c4', ar:'4/3' },
+        { src:'assets/work-02.jpg',  c:'c2', ar:'4/5' },
+        { src:'assets/work-01.jpg',  c:'c3', ar:'4/3' },
+        { src:'assets/work-07.webp', c:'c3', ar:'4/3' },
+        { src:'assets/work-06.webp', c:'c6', ar:'21/9' }
+      ]
+    },
+    {
+      no:'02',
+      title:'Salon z kominkiem',
+      meta:'Strefa wypoczynkowa · Wrocław',
+      cap:'Salon · Wrocław',
+      shots:[
+        { src:'assets/work-08.webp', c:'c4', ar:'16/10' },
+        { src:'assets/work-12.webp', c:'c2', ar:'4/5' },
+        { src:'assets/work-11.webp', c:'c3', ar:'4/3' },
+        { src:'assets/work-10.webp', c:'c3', ar:'4/3' }
+      ]
+    },
+    {
+      no:'03',
+      title:'Łazienka',
+      meta:'Strefa kąpielowa · Wrocław',
+      cap:'Łazienka · Wrocław',
+      shots:[
+        { src:'assets/work-14.jpg', c:'c4', ar:'4/3' },
+        { src:'assets/work-16.jpg', c:'c2', ar:'4/5' },
+        { src:'assets/work-15.jpg', c:'c6', ar:'16/9' }
+      ]
+    }
   ];
 
-  var grid = document.getElementById('grid');
-  WORKS.forEach(function(item, i){
-    var btn = document.createElement('button');
-    btn.className = 'shot ' + item.w + (item.full ? ' shot--full' : '');
-    btn.type = 'button';
-    btn.setAttribute('data-index', i);
-    btn.setAttribute('aria-label', 'Otwórz realizację ' + (i+1));
+  var projectsEl = document.getElementById('projects');
+  var LB_LIST = [];
 
-    var inner = document.createElement('div');
-    inner.className = 'shot__inner';
-    inner.style.setProperty('--ar', item.ar);
+  PROJECTS.forEach(function(pr){
+    var sec = document.createElement('section');
+    sec.className = 'project';
 
-    var img = document.createElement('img');
-    img.src = item.src;
-    img.alt = '';
-    img.loading = 'lazy';
-    img.decoding = 'async';
-    img.setAttribute('onerror', "this.closest('.shot').classList.add('is-missing')");
+    var head = document.createElement('div');
+    head.className = 'project__head';
+    head.setAttribute('data-reveal', '');
+    head.innerHTML =
+      '<span class="project__no">' + pr.no + '</span>' +
+      '<h3 class="project__title">' + pr.title + '</h3>' +
+      '<span class="project__meta">' + pr.meta + '</span>' +
+      '<span class="project__rule" data-rule></span>';
+    sec.appendChild(head);
 
-    var ov = document.createElement('div');
-    ov.className = 'shot__overlay';
-    // DO UZUPEŁNIENIA: podpisy realizacji
-    ov.innerHTML = '<span class="shot__cap ph">⟦NAZWA REALIZACJI⟧ · ⟦LOKALIZACJA⟧</span>';
+    var grid = document.createElement('div');
+    grid.className = 'project__grid';
 
-    inner.appendChild(img);
-    inner.appendChild(ov);
-    btn.appendChild(inner);
-    grid.appendChild(btn);
+    pr.shots.forEach(function(item){
+      var idx = LB_LIST.length;
+      LB_LIST.push(item.src);
+
+      var btn = document.createElement('button');
+      btn.className = 'shot ' + item.c;
+      btn.type = 'button';
+      btn.setAttribute('data-index', idx);
+      btn.setAttribute('aria-label', 'Powiększ — ' + pr.title);
+
+      var inner = document.createElement('div');
+      inner.className = 'shot__inner';
+      inner.style.setProperty('--ar', item.ar);
+
+      var img = document.createElement('img');
+      img.src = item.src;
+      img.alt = pr.cap;
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.setAttribute('onerror', "this.closest('.shot').classList.add('is-missing')");
+
+      var ov = document.createElement('div');
+      ov.className = 'shot__overlay';
+      ov.innerHTML = '<span class="shot__cap">' + pr.cap + '</span>';
+
+      inner.appendChild(img);
+      inner.appendChild(ov);
+      btn.appendChild(inner);
+      grid.appendChild(btn);
+    });
+
+    sec.appendChild(grid);
+    projectsEl.appendChild(sec);
   });
 
   /* ---------- YEAR ---------- */
@@ -648,7 +723,7 @@ a.contact__link:focus-visible::after{ width:100%; }
   function pad(n){ return (n < 10 ? '0' : '') + n; }
 
   function showImg(idx){
-    current = (idx + WORKS.length) % WORKS.length;
+    current = (idx + LB_LIST.length) % LB_LIST.length;
     lbImg.classList.remove('is-shown');
     var next = new Image();
     next.onload = function(){
@@ -659,8 +734,8 @@ a.contact__link:focus-visible::after{ width:100%; }
       lbImg.removeAttribute('src');
       lbImg.classList.add('is-shown');
     };
-    next.src = WORKS[current].src;
-    lbCount.textContent = pad(current + 1) + ' / ' + pad(WORKS.length);
+    next.src = LB_LIST[current];
+    lbCount.textContent = pad(current + 1) + ' / ' + pad(LB_LIST.length);
   }
 
   function openLB(idx){
@@ -676,7 +751,7 @@ a.contact__link:focus-visible::after{ width:100%; }
     if (lenisRef) lenisRef.start();
   }
 
-  grid.addEventListener('click', function(e){
+  projectsEl.addEventListener('click', function(e){
     var shot = e.target.closest('.shot');
     if (!shot || shot.classList.contains('is-missing')) return;
     openLB(parseInt(shot.getAttribute('data-index'), 10));
@@ -758,10 +833,32 @@ a.contact__link:focus-visible::after{ width:100%; }
         });
       });
 
-      gsap.utils.toArray('.shot').forEach(function(el, i){
-        gsap.from(el, {
-          y:50, opacity:0, duration:0.85, ease:'power3.out',
-          scrollTrigger:{ trigger:el, start:'top 90%' }
+      gsap.utils.toArray('.project').forEach(function(pr){
+        var rule = pr.querySelector('[data-rule]');
+        if (rule){
+          gsap.to(rule, {
+            scaleX:1, duration:1.1, ease:'power3.out',
+            scrollTrigger:{ trigger:pr.querySelector('.project__head'), start:'top 85%' }
+          });
+        }
+
+        gsap.utils.toArray(pr.querySelectorAll('.shot')).forEach(function(shot, i){
+          var inner = shot.querySelector('.shot__inner');
+          var img = shot.querySelector('img');
+          var st = { trigger:shot, start:'top 88%' };
+
+          gsap.from(inner, {
+            clipPath:'inset(0% 0% 100% 0%)',
+            duration:1.15, ease:'power3.out',
+            delay:(i % 2) * 0.08,
+            scrollTrigger:st
+          });
+          gsap.from(img, {
+            scale:1.18,
+            duration:1.5, ease:'power3.out',
+            delay:(i % 2) * 0.08,
+            scrollTrigger:st
+          });
         });
       });
 
