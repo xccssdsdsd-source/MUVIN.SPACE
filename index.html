@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUVIN.SPACE — Architect & Interior Designer</title>
+<meta name="description" content="MUVIN.SPACE — projektowanie wnętrz. Łódź · Warszawa · Wrocław.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#F3EFE8; --bg-2:#ECE6DC; --white:#FBF9F5;
+  --ink:#1C1916; --taupe:#9C8E7E; --line:#DBD3C7; --gold:#A98B5D;
+  --display:'Marcellus', serif; --body:'Hanken Grotesk', sans-serif;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+
+*{ margin:0; padding:0; box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; }
+body{
+  font-family:var(--body);
+  font-weight:300;
+  color:var(--ink);
+  background:var(--bg);
+  line-height:1.75;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img{ display:block; max-width:100%; }
+a{ color:inherit; text-decoration:none; }
+::selection{ background:var(--ink); color:var(--white); }
+
+.ph{ filter:blur(6px); user-select:none; pointer-events:none; opacity:.85; }
+
+.wrap{ width:min(92vw, 1320px); margin-inline:auto; }
+
+.eyebrow{
+  font-size:.72rem; letter-spacing:.32em; text-transform:uppercase;
+  color:var(--taupe); font-weight:500;
+}
+.section-title{
+  font-family:var(--display); font-weight:400; line-height:1.08;
+  letter-spacing:.01em;
+  font-size:clamp(2.1rem, 5vw, 3.6rem);
+}
+
+/* ---------- NAV ---------- */
+.nav{
+  position:fixed; inset:0 0 auto 0; z-index:80;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1.4rem clamp(1.2rem,4vw,3rem);
+  background:transparent;
+  border-bottom:1px solid transparent;
+  transition:background .5s var(--ease), border-color .5s var(--ease), padding .4s var(--ease);
+}
+.nav.is-scrolled{
+  background:var(--white);
+  border-bottom:1px solid var(--line);
+  padding-top:1rem; padding-bottom:1rem;
+}
+.nav__brand{
+  font-family:var(--display); font-size:1.15rem; letter-spacing:.22em;
+  color:var(--ink); white-space:nowrap;
+}
+.nav__links{
+  display:flex; align-items:center; gap:clamp(1rem,2.6vw,2.4rem);
+  list-style:none;
+}
+.nav__links a{
+  font-size:.82rem; letter-spacing:.14em; text-transform:uppercase;
+  font-weight:400; color:var(--ink);
+  position:relative; padding:.4rem 0;
+  transition:color .3s var(--ease);
+}
+.nav__links a::after{
+  content:''; position:absolute; left:0; bottom:0; height:1px; width:0;
+  background:var(--gold); transition:width .4s var(--ease);
+}
+.nav__links a:hover{ color:var(--gold); }
+.nav__links a:hover::after,
+.nav__links a:focus-visible::after{ width:100%; }
+.nav__ig{ display:none; }
+
+/* ---------- HERO ---------- */
+.hero{
+  position:relative; min-height:100svh;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:6rem 1.2rem 4rem;
+  overflow:hidden;
+}
+.hero__bg{
+  position:absolute; inset:0; z-index:-2;
+  background:
+    radial-gradient(120% 90% at 25% 15%, #FBF9F5 0%, transparent 55%),
+    radial-gradient(120% 110% at 80% 90%, var(--bg-2) 0%, transparent 60%),
+    linear-gradient(155deg, #F6F2EB 0%, var(--bg) 45%, var(--bg-2) 100%);
+}
+.hero__grain{
+  position:absolute; inset:0; z-index:-1; opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.hero__wordmark{
+  font-family:var(--display); font-weight:400;
+  font-size:clamp(2.6rem, 11vw, 8.2rem);
+  letter-spacing:.06em; line-height:1; color:var(--ink);
+}
+.hero__wordmark .char{ display:inline-block; }
+.hero__sub{
+  margin-top:1.6rem;
+  font-size:clamp(.7rem,1.7vw,.95rem); letter-spacing:.42em;
+  text-transform:uppercase; color:var(--taupe); font-weight:400;
+}
+.hero__scroll{
+  position:absolute; bottom:2.2rem; left:50%; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:.7rem;
+  font-size:.62rem; letter-spacing:.3em; text-transform:uppercase; color:var(--taupe);
+}
+.hero__scroll .line{
+  width:1px; height:46px; background:linear-gradient(var(--taupe), transparent);
+  animation:scrollpulse 2.4s var(--ease) infinite;
+}
+@keyframes scrollpulse{
+  0%,100%{ transform:scaleY(.5); opacity:.4; transform-origin:top; }
+  50%{ transform:scaleY(1); opacity:1; transform-origin:top; }
+}
+
+/* ---------- ABOUT ---------- */
+.about{ padding:clamp(5rem,12vw,9rem) 0 clamp(3rem,7vw,5rem); }
+.about__grid{
+  display:grid; grid-template-columns:1fr; gap:clamp(2.4rem,5vw,4.5rem);
+  align-items:center;
+}
+.about__copy .eyebrow{ display:block; margin-bottom:1.3rem; }
+.about__copy p{
+  max-width:54ch; margin-top:1.6rem; color:#4a443d; font-weight:300;
+  font-size:1.02rem;
+}
+.about__media{
+  position:relative; border:1px solid var(--line); padding:.7rem; background:var(--white);
+}
+.about__media .frame{
+  overflow:hidden; aspect-ratio:4/5;
+}
+.about__media img{
+  width:100%; height:118%; object-fit:cover; will-change:transform;
+}
+.cities{
+  margin-top:clamp(3rem,7vw,5rem); padding-top:2.2rem;
+  border-top:1px solid var(--line);
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:.6rem 1.4rem;
+  font-family:var(--display); font-size:clamp(1.3rem,3.4vw,2.1rem);
+  letter-spacing:.04em;
+}
+.cities .dot{ color:var(--gold); font-size:.7em; }
+.cities .label{
+  font-family:var(--body); font-size:.72rem; letter-spacing:.3em;
+  text-transform:uppercase; color:var(--taupe); width:100%; margin-bottom:.4rem;
+}
+
+/* ---------- WORK / GALLERY ---------- */
+.work{ padding:clamp(3rem,7vw,5rem) 0 clamp(5rem,12vw,9rem); }
+.work__head{
+  display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between;
+  gap:1rem; margin-bottom:clamp(2.4rem,5vw,3.8rem);
+}
+.work__head .eyebrow{ display:block; margin-bottom:1rem; }
+.work__head p{ color:var(--taupe); max-width:34ch; font-size:.92rem; }
+
+.grid{
+  display:grid; grid-template-columns:repeat(12,1fr);
+  gap:clamp(.7rem,1.6vw,1.4rem);
+}
+.shot{
+  grid-column:span 6; position:relative; overflow:hidden;
+  background:var(--bg-2); cursor:pointer; border:none;
+  padding:0; margin:0; font:inherit; color:inherit; text-align:left;
+  display:block; width:100%;
+}
+.shot__inner{ position:relative; width:100%; height:100%; overflow:hidden; aspect-ratio:var(--ar,4/5); }
+.shot img{
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .9s var(--ease);
+  will-change:transform;
+}
+.shot__overlay{
+  position:absolute; inset:0; z-index:2;
+  background:linear-gradient(to top, rgba(28,25,22,.55) 0%, rgba(28,25,22,0) 55%);
+  opacity:0; transition:opacity .5s var(--ease);
+  display:flex; align-items:flex-end; padding:1.3rem;
+}
+.shot__cap{
+  color:var(--white); font-family:var(--body);
+  font-size:.78rem; letter-spacing:.16em; text-transform:uppercase;
+  transform:translateY(8px); transition:transform .5s var(--ease);
+}
+.shot:hover img,
+.shot:focus-visible img{ transform:scale(1.06); }
+.shot:hover .shot__overlay,
+.shot:focus-visible .shot__overlay{ opacity:1; }
+.shot:hover .shot__cap,
+.shot:focus-visible .shot__cap{ transform:translateY(0); }
+.shot:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+
+/* missing-image passe-partout */
+.shot.is-missing img,
+.shot.is-missing .shot__overlay{ display:none; }
+.shot.is-missing .shot__inner{
+  border:1px solid var(--line);
+  background:
+    repeating-linear-gradient(45deg, transparent 0 14px, rgba(156,142,126,.05) 14px 28px),
+    var(--bg);
+  display:flex; align-items:center; justify-content:center;
+}
+.shot.is-missing .shot__inner::after{
+  content:'wkrótce'; color:var(--taupe);
+  font-size:.8rem; letter-spacing:.32em; text-transform:uppercase;
+}
+
+/* ---------- CONTACT ---------- */
+.contact{ padding:clamp(4rem,9vw,7rem) 0; background:var(--white); border-top:1px solid var(--line); }
+.contact__grid{
+  display:grid; grid-template-columns:1fr; gap:clamp(2.6rem,6vw,5rem);
+  margin-top:clamp(2.4rem,5vw,3.6rem);
+}
+.contact__info{ display:flex; flex-direction:column; gap:1.9rem; }
+.contact__row .lbl{
+  font-size:.68rem; letter-spacing:.28em; text-transform:uppercase;
+  color:var(--taupe); margin-bottom:.45rem;
+}
+.contact__row .val{
+  font-family:var(--display); font-size:clamp(1.15rem,2.6vw,1.6rem);
+  letter-spacing:.02em; position:relative; display:inline-block;
+}
+a.contact__link{ position:relative; transition:color .3s var(--ease); }
+a.contact__link::after{
+  content:''; position:absolute; left:0; bottom:-2px; height:1px; width:0;
+  background:var(--gold); transition:width .4s var(--ease);
+}
+a.contact__link:hover{ color:var(--gold); }
+a.contact__link:hover::after,
+a.contact__link:focus-visible::after{ width:100%; }
+
+.form{ display:flex; flex-direction:column; gap:1.3rem; }
+.field label{
+  display:block; font-size:.68rem; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--taupe); margin-bottom:.55rem;
+}
+.field input, .field textarea{
+  width:100%; background:transparent; border:none;
+  border-bottom:1px solid var(--line);
+  font-family:var(--body); font-size:1rem; font-weight:300; color:var(--ink);
+  padding:.7rem 0; transition:border-color .35s var(--ease);
+  resize:vertical; min-height:44px;
+}
+.field textarea{ min-height:120px; }
+.field input:focus, .field textarea:focus{ outline:none; border-color:var(--gold); }
+.field.has-error input, .field.has-error textarea{ border-color:#b45a4a; }
+.field .err{ display:none; color:#b45a4a; font-size:.74rem; letter-spacing:.04em; margin-top:.4rem; }
+.field.has-error .err{ display:block; }
+.btn{
+  align-self:flex-start; margin-top:.6rem;
+  font-family:var(--body); font-size:.78rem; letter-spacing:.22em; text-transform:uppercase;
+  background:var(--ink); color:var(--white);
+  border:1px solid var(--ink); cursor:pointer;
+  padding:.95em 2.2em; min-height:44px;
+  transition:background .4s var(--ease), color .4s var(--ease);
+}
+.btn:hover, .btn:focus-visible{ background:transparent; color:var(--ink); }
+.form__note{ font-size:.78rem; color:var(--taupe); }
+
+/* ---------- FOOTER ---------- */
+.footer{ border-top:1px solid var(--line); padding:clamp(3rem,6vw,4.5rem) 0 2.4rem; }
+.footer__grid{
+  display:flex; flex-wrap:wrap; gap:2rem; justify-content:space-between; align-items:flex-start;
+}
+.footer__brand{ font-family:var(--display); font-size:1.4rem; letter-spacing:.22em; }
+.footer__col{ display:flex; flex-direction:column; gap:.5rem; font-size:.86rem; color:#4a443d; }
+.footer__col .lbl{ font-size:.66rem; letter-spacing:.26em; text-transform:uppercase; color:var(--taupe); margin-bottom:.3rem; }
+.footer__bottom{
+  margin-top:clamp(2.4rem,5vw,3.4rem); padding-top:1.6rem; border-top:1px solid var(--line);
+  display:flex; flex-wrap:wrap; gap:.6rem 1.4rem; justify-content:space-between;
+  font-size:.74rem; letter-spacing:.12em; color:var(--taupe); text-transform:uppercase;
+}
+
+/* ---------- LIGHTBOX ---------- */
+.lb{
+  position:fixed; inset:0; z-index:120;
+  background:rgba(28,25,22,.92);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; visibility:hidden; transition:opacity .45s var(--ease), visibility .45s var(--ease);
+}
+.lb.is-open{ opacity:1; visibility:visible; }
+.lb__stage{
+  position:relative; width:min(92vw,1200px); height:min(84svh,860px);
+  display:flex; align-items:center; justify-content:center;
+}
+.lb__img{
+  max-width:100%; max-height:100%; object-fit:contain;
+  box-shadow:0 30px 80px rgba(0,0,0,.45);
+  opacity:0; transition:opacity .4s var(--ease);
+}
+.lb__img.is-shown{ opacity:1; }
+.lb__btn{
+  position:absolute; z-index:3;
+  width:52px; height:52px; min-width:44px; min-height:44px;
+  display:flex; align-items:center; justify-content:center;
+  background:transparent; border:1px solid rgba(251,249,245,.35);
+  color:var(--white); cursor:pointer; border-radius:50%;
+  transition:background .3s var(--ease), border-color .3s var(--ease);
+  font-size:1.3rem; line-height:1;
+}
+.lb__btn:hover, .lb__btn:focus-visible{ background:rgba(251,249,245,.12); border-color:var(--white); outline:none; }
+.lb__close{ top:1.4rem; right:1.4rem; }
+.lb__prev{ left:1.2rem; top:50%; transform:translateY(-50%); }
+.lb__next{ right:1.2rem; top:50%; transform:translateY(-50%); }
+.lb__count{
+  position:absolute; bottom:1.4rem; left:50%; transform:translateX(-50%);
+  color:rgba(251,249,245,.8); font-size:.8rem; letter-spacing:.3em;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (min-width:640px){
+  .nav__ig{ display:inline; }
+  .about__copy p{ font-size:1.05rem; }
+}
+@media (min-width:1024px){
+  .about__grid{ grid-template-columns:1.05fr .95fr; }
+  .contact__grid{ grid-template-columns:1fr 1fr; }
+
+  .shot{ grid-column:span 4; }
+  .w4{ grid-column:span 4; }
+  .w5{ grid-column:span 5; }
+  .w6{ grid-column:span 6; }
+  .w7{ grid-column:span 7; }
+  .w8{ grid-column:span 8; }
+  .w12{ grid-column:span 12; }
+}
+@media (max-width:1023px){
+  .shot.shot--full{ grid-column:span 12; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hero__scroll .line{ animation:none; }
+  .shot img{ transition:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <a href="#top" class="nav__brand" aria-label="MUVIN.SPACE — strona główna">MUVIN.SPACE</a>
+  <nav aria-label="Główna nawigacja">
+    <ul class="nav__links">
+      <li><a href="#about">O studiu</a></li>
+      <li><a href="#work">Realizacje</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+      <li class="nav__ig"><a href="https://instagram.com/muvin.space" target="_blank" rel="noopener">Instagram</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="hero__bg" aria-hidden="true"></div>
+  <div class="hero__grain" aria-hidden="true"></div>
+  <div data-hero>
+    <h1 class="hero__wordmark" aria-label="MUVIN.SPACE"><span class="hero__wordmark-inner" aria-hidden="true">MUVIN.SPACE</span></h1>
+    <p class="hero__sub">Architect &amp; Interior Designer</p>
+  </div>
+  <div class="hero__scroll" aria-hidden="true">
+    <span>Przewiń</span>
+    <span class="line"></span>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about__grid">
+      <div class="about__copy" data-reveal>
+        <span class="eyebrow">O studiu</span>
+        <h2 class="section-title">Projektowanie wnętrz<br>z dbałością o światło i materiał</h2>
+        <!-- DO UZUPEŁNIENIA: opis studia -->
+        <p class="ph">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu
+          tincidunt consectetur, nisi nisl aliquam nunc, eget aliquam nisl nunc eu nisl.
+          Donec euismod, urna eu tincidunt consectetur, nisi nisl aliquam nunc, eget
+          aliquam nisl nunc eu nisl. Praesent commodo cursus magna vel scelerisque.
+        </p>
+        <p class="ph">
+          Curabitur blandit tempus porttitor. Integer posuere erat a ante venenatis
+          dapibus posuere velit aliquet, sed posuere consectetur est at lobortis.
+        </p>
+      </div>
+      <div class="about__media" data-reveal>
+        <div class="frame">
+          <img id="aboutImg" src="assets/work-02.jpg" alt="" loading="lazy" decoding="async"
+               data-parallax
+               onerror="this.closest('.about__media').classList.add('is-missing')">
+        </div>
+      </div>
+    </div>
+
+    <div class="cities" data-reveal>
+      <span class="label">Działamy w miastach</span>
+      <span>Łódź</span><span class="dot">·</span>
+      <span>Warszawa</span><span class="dot">·</span>
+      <span>Wrocław</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WORK ================= -->
+<section class="work" id="work">
+  <div class="wrap">
+    <div class="work__head">
+      <div data-reveal>
+        <span class="eyebrow">Realizacje</span>
+        <h2 class="section-title">Wybrane projekty</h2>
+      </div>
+      <p data-reveal>Mieszkania, kuchnie i strefy dzienne — spójna paleta ciepłych beży, drewna i delikatnego złota.</p>
+    </div>
+    <div class="grid" id="grid" aria-label="Galeria realizacji"></div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div data-reveal>
+      <span class="eyebrow">Kontakt</span>
+      <h2 class="section-title">Porozmawiajmy o Twoim wnętrzu</h2>
+    </div>
+    <div class="contact__grid">
+      <div class="contact__info" data-reveal>
+        <div class="contact__row">
+          <div class="lbl">E-mail</div>
+          <a class="contact__link val" href="mailto:muvin.space@gmail.com">muvin.space@gmail.com</a>
+        </div>
+        <div class="contact__row">
+          <div class="lbl">Telefon</div>
+          <!-- DO UZUPEŁNIENIA: telefon -->
+          <span class="val ph">⟦TELEFON⟧</span>
+        </div>
+        <div class="contact__row">
+          <div class="lbl">Instagram</div>
+          <a class="contact__link val" href="https://instagram.com/muvin.space" target="_blank" rel="noopener">muvin.space</a>
+        </div>
+        <div class="contact__row">
+          <div class="lbl">Miasta</div>
+          <span class="val">Łódź · Warszawa · Wrocław</span>
+        </div>
+      </div>
+
+      <form class="form" id="contactForm" novalidate data-reveal>
+        <div class="field" id="f-name">
+          <label for="in-name">Imię</label>
+          <input type="text" id="in-name" name="name" autocomplete="name">
+          <span class="err">Podaj swoje imię.</span>
+        </div>
+        <div class="field" id="f-email">
+          <label for="in-email">E-mail</label>
+          <input type="email" id="in-email" name="email" autocomplete="email">
+          <span class="err">Podaj poprawny adres e-mail.</span>
+        </div>
+        <div class="field" id="f-msg">
+          <label for="in-msg">Wiadomość</label>
+          <textarea id="in-msg" name="message"></textarea>
+          <span class="err">Napisz kilka słów o projekcie.</span>
+        </div>
+        <button type="submit" class="btn">Wyślij</button>
+        <p class="form__note">Formularz otworzy Twój program pocztowy z gotową wiadomością do muvin.space@gmail.com.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div class="footer__brand">MUVIN.SPACE</div>
+      <div class="footer__col">
+        <span class="lbl">Miasta</span>
+        <span>Łódź</span><span>Warszawa</span><span>Wrocław</span>
+      </div>
+      <div class="footer__col">
+        <span class="lbl">Kontakt</span>
+        <a class="contact__link" href="mailto:muvin.space@gmail.com">muvin.space@gmail.com</a>
+        <a class="contact__link" href="https://instagram.com/muvin.space" target="_blank" rel="noopener">Instagram · muvin.space</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>MUVIN.SPACE — Architect &amp; Interior Designer</span>
+      <span id="year"></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= LIGHTBOX ================= -->
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Podgląd realizacji">
+  <button class="lb__btn lb__close" id="lbClose" aria-label="Zamknij">&#10005;</button>
+  <button class="lb__btn lb__prev" id="lbPrev" aria-label="Poprzednie zdjęcie">&#8249;</button>
+  <div class="lb__stage">
+    <img class="lb__img" id="lbImg" src="" alt="">
+  </div>
+  <button class="lb__btn lb__next" id="lbNext" aria-label="Następne zdjęcie">&#8250;</button>
+  <div class="lb__count" id="lbCount"></div>
+</div>
+
+<!-- ================= SCRIPTS ================= -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script>
+(function(){
+  'use strict';
+
+  /* ---------- DATA: realizacje (natural sort) ---------- */
+  var WORKS = [
+    { src:'assets/work-01.jpg',  w:'w7',  ar:'4/3' },
+    { src:'assets/work-02.jpg',  w:'w5',  ar:'4/5' },
+    { src:'assets/work-03.jpg',  w:'w5',  ar:'4/5' },
+    { src:'assets/work-04.jpg',  w:'w7',  ar:'4/3' },
+    { src:'assets/work-05.webp', w:'w12', ar:'21/9', full:true },
+    { src:'assets/work-06.webp', w:'w4',  ar:'4/5' },
+    { src:'assets/work-07.webp', w:'w4',  ar:'4/5' },
+    { src:'assets/work-08.webp', w:'w4',  ar:'4/5' },
+    { src:'assets/work-09.webp', w:'w8',  ar:'16/9' },
+    { src:'assets/work-10.webp', w:'w4',  ar:'4/5' },
+    { src:'assets/work-11.webp', w:'w6',  ar:'1/1' },
+    { src:'assets/work-12.webp', w:'w6',  ar:'1/1' },
+    { src:'assets/work-13.webp', w:'w12', ar:'21/9', full:true },
+    { src:'assets/work-14.jpg',  w:'w4',  ar:'4/5' },
+    { src:'assets/work-15.jpg',  w:'w4',  ar:'4/5' },
+    { src:'assets/work-16.jpg',  w:'w4',  ar:'4/5' }
+  ];
+
+  var grid = document.getElementById('grid');
+  WORKS.forEach(function(item, i){
+    var btn = document.createElement('button');
+    btn.className = 'shot ' + item.w + (item.full ? ' shot--full' : '');
+    btn.type = 'button';
+    btn.setAttribute('data-index', i);
+    btn.setAttribute('aria-label', 'Otwórz realizację ' + (i+1));
+
+    var inner = document.createElement('div');
+    inner.className = 'shot__inner';
+    inner.style.setProperty('--ar', item.ar);
+
+    var img = document.createElement('img');
+    img.src = item.src;
+    img.alt = '';
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.setAttribute('onerror', "this.closest('.shot').classList.add('is-missing')");
+
+    var ov = document.createElement('div');
+    ov.className = 'shot__overlay';
+    // DO UZUPEŁNIENIA: podpisy realizacji
+    ov.innerHTML = '<span class="shot__cap ph">⟦NAZWA REALIZACJI⟧ · ⟦LOKALIZACJA⟧</span>';
+
+    inner.appendChild(img);
+    inner.appendChild(ov);
+    btn.appendChild(inner);
+    grid.appendChild(btn);
+  });
+
+  /* ---------- YEAR ---------- */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ---------- NAV scroll state ---------- */
+  var nav = document.getElementById('nav');
+  function onScrollNav(){
+    if (window.scrollY > window.innerHeight * 0.7) nav.classList.add('is-scrolled');
+    else nav.classList.remove('is-scrolled');
+  }
+  onScrollNav();
+  window.addEventListener('scroll', onScrollNav, { passive:true });
+
+  /* ---------- LIGHTBOX ---------- */
+  var lb = document.getElementById('lightbox');
+  var lbImg = document.getElementById('lbImg');
+  var lbCount = document.getElementById('lbCount');
+  var current = 0;
+  var lenisRef = null;
+
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+
+  function showImg(idx){
+    current = (idx + WORKS.length) % WORKS.length;
+    lbImg.classList.remove('is-shown');
+    var next = new Image();
+    next.onload = function(){
+      lbImg.src = next.src;
+      requestAnimationFrame(function(){ lbImg.classList.add('is-shown'); });
+    };
+    next.onerror = function(){
+      lbImg.removeAttribute('src');
+      lbImg.classList.add('is-shown');
+    };
+    next.src = WORKS[current].src;
+    lbCount.textContent = pad(current + 1) + ' / ' + pad(WORKS.length);
+  }
+
+  function openLB(idx){
+    showImg(idx);
+    lb.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    if (lenisRef) lenisRef.stop();
+    document.getElementById('lbClose').focus();
+  }
+  function closeLB(){
+    lb.classList.remove('is-open');
+    document.body.style.overflow = '';
+    if (lenisRef) lenisRef.start();
+  }
+
+  grid.addEventListener('click', function(e){
+    var shot = e.target.closest('.shot');
+    if (!shot || shot.classList.contains('is-missing')) return;
+    openLB(parseInt(shot.getAttribute('data-index'), 10));
+  });
+
+  document.getElementById('lbClose').addEventListener('click', closeLB);
+  document.getElementById('lbPrev').addEventListener('click', function(){ showImg(current - 1); });
+  document.getElementById('lbNext').addEventListener('click', function(){ showImg(current + 1); });
+  lb.addEventListener('click', function(e){ if (e.target === lb || e.target.classList.contains('lb__stage')) closeLB(); });
+  document.addEventListener('keydown', function(e){
+    if (!lb.classList.contains('is-open')) return;
+    if (e.key === 'Escape') closeLB();
+    else if (e.key === 'ArrowLeft') showImg(current - 1);
+    else if (e.key === 'ArrowRight') showImg(current + 1);
+  });
+
+  /* ---------- CONTACT FORM → mailto ---------- */
+  var form = document.getElementById('contactForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('in-name');
+    var email = document.getElementById('in-email');
+    var msg = document.getElementById('in-msg');
+    var ok = true;
+
+    function mark(id, valid){
+      var f = document.getElementById(id);
+      if (valid) f.classList.remove('has-error'); else { f.classList.add('has-error'); ok = false; }
+    }
+    var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+    mark('f-name', name.value.trim() !== '');
+    mark('f-email', emailOk);
+    mark('f-msg', msg.value.trim() !== '');
+    if (!ok) return;
+
+    var subject = 'Zapytanie ze strony — ' + name.value.trim();
+    var body = 'Imię: ' + name.value.trim() + '\nE-mail: ' + email.value.trim() + '\n\n' + msg.value.trim();
+    window.location.href = 'mailto:muvin.space@gmail.com?subject=' +
+      encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  });
+
+  /* ---------- MOTION ---------- */
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (window.gsap){
+    gsap.registerPlugin(ScrollTrigger);
+
+    if (window.Lenis && !reduce){
+      var lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+      lenisRef = lenis;
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add(function(t){ lenis.raf(t * 1000); });
+      gsap.ticker.lagSmoothing(0);
+    }
+
+    // HERO wordmark reveal (split into chars)
+    var wm = document.querySelector('.hero__wordmark-inner');
+    if (wm){
+      var text = wm.textContent;
+      wm.textContent = '';
+      text.split('').forEach(function(ch){
+        var s = document.createElement('span');
+        s.className = 'char';
+        s.textContent = ch;
+        wm.appendChild(s);
+      });
+    }
+
+    if (!reduce){
+      var tl = gsap.timeline({ defaults:{ ease:'expo.out' } });
+      tl.from('.hero__wordmark .char', { yPercent:115, opacity:0, duration:1.1, stagger:0.045, delay:0.15 })
+        .from('.hero__sub', { y:18, opacity:0, duration:1 }, '-=0.6')
+        .from('.hero__scroll', { opacity:0, duration:0.8 }, '-=0.4');
+
+      gsap.utils.toArray('[data-reveal]').forEach(function(el){
+        gsap.from(el, {
+          y:42, opacity:0, duration:0.95, ease:'power3.out',
+          scrollTrigger:{ trigger:el, start:'top 85%' }
+        });
+      });
+
+      gsap.utils.toArray('.shot').forEach(function(el, i){
+        gsap.from(el, {
+          y:50, opacity:0, duration:0.85, ease:'power3.out',
+          scrollTrigger:{ trigger:el, start:'top 90%' }
+        });
+      });
+
+      // Parallax on large about image (max ~8%)
+      gsap.utils.toArray('[data-parallax]').forEach(function(el){
+        gsap.fromTo(el, { yPercent:-8 }, {
+          yPercent:8, ease:'none',
+          scrollTrigger:{ trigger:el, start:'top bottom', end:'bottom top', scrub:true }
+        });
+      });
+    }
+  }
+})();
+</script>
+</body>
+</html>
