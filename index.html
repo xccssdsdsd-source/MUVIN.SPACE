@@ -65,24 +65,48 @@ a{ color:inherit; text-decoration:none; }
   font-family:var(--display); font-size:1.15rem; letter-spacing:.22em;
   color:var(--ink); white-space:nowrap;
 }
+/* mobile-first: nav links as a drop panel toggled by hamburger */
 .nav__links{
-  display:flex; align-items:center; gap:clamp(1rem,2.6vw,2.4rem);
   list-style:none;
+  position:absolute; top:100%; left:0; right:0;
+  display:flex; flex-direction:column; align-items:stretch; gap:0;
+  background:var(--white); border-bottom:1px solid var(--line);
+  padding:.2rem clamp(1.2rem,4vw,3rem) .8rem;
+  opacity:0; visibility:hidden; transform:translateY(-10px);
+  transition:opacity .35s var(--ease), transform .35s var(--ease), visibility .35s var(--ease);
 }
+.nav.is-open .nav__links{ opacity:1; visibility:visible; transform:translateY(0); }
+.nav.is-open{ background:var(--white); border-bottom-color:var(--line); }
+.nav__links li{ border-top:1px solid var(--line); }
+.nav__links li:first-child{ border-top:none; }
 .nav__links a{
-  font-size:.82rem; letter-spacing:.14em; text-transform:uppercase;
+  display:block; min-height:44px; padding:.95rem 0;
+  font-size:.86rem; letter-spacing:.16em; text-transform:uppercase;
   font-weight:400; color:var(--ink);
-  position:relative; padding:.4rem 0;
+  position:relative;
   transition:color .3s var(--ease);
 }
 .nav__links a::after{
-  content:''; position:absolute; left:0; bottom:0; height:1px; width:0;
+  content:''; position:absolute; left:0; bottom:.55rem; height:1px; width:0;
   background:var(--gold); transition:width .4s var(--ease);
 }
 .nav__links a:hover{ color:var(--gold); }
 .nav__links a:hover::after,
 .nav__links a:focus-visible::after{ width:100%; }
-.nav__ig{ display:none; }
+
+.nav__toggle{
+  display:flex; align-items:center; justify-content:center;
+  position:relative; width:44px; height:44px;
+  background:transparent; border:none; cursor:pointer; padding:0;
+}
+.nav__toggle span{
+  position:absolute; left:11px; right:11px; height:1.5px; background:var(--ink);
+  transition:transform .35s var(--ease), opacity .35s var(--ease);
+}
+.nav__toggle span:nth-child(1){ top:18px; }
+.nav__toggle span:nth-child(2){ top:25px; }
+.nav.is-open .nav__toggle span:nth-child(1){ transform:translateY(3.5px) rotate(45deg); }
+.nav.is-open .nav__toggle span:nth-child(2){ transform:translateY(-3.5px) rotate(-45deg); }
 
 /* ---------- HERO ---------- */
 .hero{
@@ -91,12 +115,15 @@ a{ color:inherit; text-decoration:none; }
   text-align:center; padding:6rem 1.2rem 4rem;
   overflow:hidden;
 }
+.hero__photo{
+  position:absolute; inset:0; z-index:-3;
+  background:url('assets/work-02.jpg') center/cover no-repeat;
+}
 .hero__bg{
   position:absolute; inset:0; z-index:-2;
   background:
-    radial-gradient(120% 90% at 25% 15%, #FBF9F5 0%, transparent 55%),
-    radial-gradient(120% 110% at 80% 90%, var(--bg-2) 0%, transparent 60%),
-    linear-gradient(155deg, #F6F2EB 0%, var(--bg) 45%, var(--bg-2) 100%);
+    radial-gradient(120% 90% at 25% 15%, rgba(251,249,245,.55) 0%, transparent 55%),
+    linear-gradient(155deg, rgba(246,242,235,.86) 0%, rgba(243,239,232,.78) 45%, rgba(236,230,220,.88) 100%);
 }
 .hero__grain{
   position:absolute; inset:0; z-index:-1; opacity:.05;
@@ -323,8 +350,18 @@ a.contact__link:focus-visible::after{ width:100%; }
 
 /* ---------- RESPONSIVE ---------- */
 @media (min-width:640px){
-  .nav__ig{ display:inline; }
   .about__copy p{ font-size:1.05rem; }
+}
+@media (min-width:768px){
+  .nav__toggle{ display:none; }
+  .nav__links{
+    position:static; flex-direction:row; align-items:center; gap:clamp(1rem,2.6vw,2.4rem);
+    background:transparent; border:none; padding:0;
+    opacity:1; visibility:visible; transform:none;
+  }
+  .nav__links li, .nav__links li:first-child{ border:none; }
+  .nav__links a{ min-height:auto; padding:.4rem 0; font-size:.82rem; letter-spacing:.14em; }
+  .nav__links a::after{ bottom:0; }
 }
 @media (min-width:1024px){
   .about__grid{ grid-template-columns:1.05fr .95fr; }
@@ -354,17 +391,21 @@ a.contact__link:focus-visible::after{ width:100%; }
 <header class="nav" id="nav">
   <a href="#top" class="nav__brand" aria-label="MUVIN.SPACE — strona główna">MUVIN.SPACE</a>
   <nav aria-label="Główna nawigacja">
-    <ul class="nav__links">
+    <ul class="nav__links" id="navLinks">
       <li><a href="#about">O studiu</a></li>
       <li><a href="#work">Realizacje</a></li>
       <li><a href="#contact">Kontakt</a></li>
-      <li class="nav__ig"><a href="https://instagram.com/muvin.space" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://instagram.com/muvin.space" target="_blank" rel="noopener">Instagram</a></li>
     </ul>
   </nav>
+  <button class="nav__toggle" id="navToggle" aria-label="Otwórz menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span>
+  </button>
 </header>
 
 <!-- ================= HERO ================= -->
 <section class="hero" id="top">
+  <div class="hero__photo" aria-hidden="true"></div>
   <div class="hero__bg" aria-hidden="true"></div>
   <div class="hero__grain" aria-hidden="true"></div>
   <div data-hero>
@@ -580,6 +621,21 @@ a.contact__link:focus-visible::after{ width:100%; }
   }
   onScrollNav();
   window.addEventListener('scroll', onScrollNav, { passive:true });
+
+  /* ---------- MOBILE MENU ---------- */
+  var navToggle = document.getElementById('navToggle');
+  function setMenu(open){
+    nav.classList.toggle('is-open', open);
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    navToggle.setAttribute('aria-label', open ? 'Zamknij menu' : 'Otwórz menu');
+  }
+  navToggle.addEventListener('click', function(){ setMenu(!nav.classList.contains('is-open')); });
+  document.querySelectorAll('.nav__links a').forEach(function(a){
+    a.addEventListener('click', function(){ setMenu(false); });
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) setMenu(false);
+  });
 
   /* ---------- LIGHTBOX ---------- */
   var lb = document.getElementById('lightbox');
